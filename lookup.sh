@@ -5,7 +5,7 @@ printf 'Enter as many domains as you want to check(can be one at a time, multipl
 # Runs whois, gets server strings, checks strings for DDC.
 # If 1 or more matches: Yes; Else: No
 ddc_check (){
-for d in $@ 
+for d in $@
 do
 	w=`whois -h whois.domain.com $d | grep -A1 "Registrar WHOIS Server:"`
 	if [[ $w == *"domain.com"* ]]; then
@@ -21,6 +21,6 @@ done
 while true
 do
 	read varname
-	if [[ $varname == "exit" ]]; then exit 0; fi	
+	if [[ $varname == "exit" ]]; then exit 0; fi
 	ddc_check $varname
 done
