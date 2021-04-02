@@ -7,9 +7,12 @@ printf 'Enter as many domains as you want to check(can be one at a time, multipl
 ddc_check (){
 for d in $@
 do
-	w=`whois -h whois.domain.com $d | grep -A1 "Registrar WHOIS Server:"`
-	if [[ $w == *"domain.com"* ]]; then
-		printf "\n$d - YES!\n"
+	wddc=`whois -h whois.domain.com $d | grep -A1 "Registrar WHOIS Server:"`
+        wgdr=`whois -h whois.porkbun.com $d | grep -A1 "Registrar WHOIS Server:"`
+        if [[ $wddc == *"domain.com"* ]]; then
+                printf "\n$d - YES! - Domain.com\n"
+        elif [[ $wgdr == *"porkbun.com"* ]]; then
+                printf "\n $d - YES! - GoDaddy Registry\n"
 	else
 		printf "\n        $d - NO!\n"
 	fi
